@@ -44,3 +44,47 @@
 .tp-footer-meta{text-align:right;font-size:13px}.tp-footer-meta p{margin:7px 0 0}.tp-footer-disclaimer{opacity:.68}
 .tp-footer-social{display:flex;justify-content:flex-end;gap:18px;margin-bottom:12px}.tp-footer-social a{font-weight:800;color:#d7e7ef}.tp-footer-social a:hover{color:#fff}
 @media(max-width:650px){.tp-footer-inner{width:calc(100% - 36px);padding:38px 0 30px;display:block}.tp-footer-brand img{width:145px}.tp-footer-meta{text-align:left;margin-top:26px}.tp-footer-social{justify-content:flex-start}}
+
+/* v6: Home featured series showcase — wide centered cinematic image */
+.tp-featured-stack{
+  padding:96px max(4vw,28px) 104px;
+}
+.tp-featured-stack-media{
+  width:min(1480px,92vw);
+  max-width:none;
+  margin:0 auto 34px;
+  display:block;
+}
+.tp-featured-stack-media img,
+.tp-featured-stack-media .cms-media-placeholder{
+  width:100%;
+  height:auto;
+  min-height:0;
+  aspect-ratio:16/7;
+  border:1px solid var(--tp-line);
+  border-radius:34px;
+  object-fit:cover;
+  object-position:center;
+  background:linear-gradient(135deg,#102632,#172934);
+  overflow:hidden;
+}
+.tp-featured-stack-copy{
+  width:min(1480px,92vw);
+  max-width:none;
+  margin:0 auto;
+}
+.tp-featured-stack-copy h2{margin-top:14px}
+
+@media(max-width:900px){
+  .tp-featured-stack-media,
+  .tp-featured-stack-copy{width:min(94vw,1480px)}
+  .tp-featured-stack-media img,
+  .tp-featured-stack-media .cms-media-placeholder{aspect-ratio:16/9;border-radius:26px}
+}
+@media(max-width:650px){
+  .tp-featured-stack{padding:62px 16px 70px}
+  .tp-featured-stack-media,
+  .tp-featured-stack-copy{width:100%}
+  .tp-featured-stack-media img,
+  .tp-featured-stack-media .cms-media-placeholder{aspect-ratio:4/3;border-radius:22px}
+}
