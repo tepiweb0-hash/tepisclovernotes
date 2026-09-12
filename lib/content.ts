@@ -14,12 +14,18 @@ export async function getBootstrap(): Promise<Bootstrap> {
   try {
     const joiner = base.includes('?') ? '&' : '?'
     const res = await fetch(`${base}${joiner}action=bootstrap`, {
-      next: { revalidate: 60 },
+      cache: 'no-store',
       headers: { Accept: 'application/json' }
     })
     if (!res.ok) throw new Error(`Content API returned ${res.status}`)
     const json = await res.json()
-    return { ...EMPTY, ...json, ok: json?.ok !== false }
+    const media = Array.isArray(json?.media)
+      ? json.media.map((item: any) => ({
+          ...item,
+          url: item?.file_id ? `https://lh3.googleusercontent.com/d/${encodeURIComponent(String(item.file_id))}` : item?.url
+        }))
+      : []
+    return { ...EMPTY, ...json, media, ok: json?.ok !== false }
   } catch (error) {
     return { ...EMPTY, error: error instanceof Error ? error.message : 'Unable to load content.' }
   }
