@@ -1,9 +1,14 @@
-TEPIPH Vercel CMS-ready shell v2
+TPWEB COMPLETE FLAT BUILD V5
+Upload all files directly to the Vercel project root.
 
-1. Deploy the fresh Apps Script CMS package first.
-2. Copy its /exec deployment URL.
-3. Open config.js in this Vercel package and replace PASTE_APPS_SCRIPT_EXEC_URL_HERE.
-4. Deploy all files flat at the project root.
+Main updates:
+- Artist profiles: Basic Info → Timeline → Awards/Recognition → Frames and Moments → Series → Additional Notes.
+- All series destinations use the same Match Point-style structure.
+- Episode control is labeled View Episode List and demo explanation bars are removed.
+- Only the user-supplied Teshow/Ping photos are used for artist portraits.
+- Light/dark mode rebuilt with one controller.
+- Notification center remains outside the navbar.
+- Main Events sample is the Aug 29, 2026 Special Olympics Thailand Charity Football Match 2026.
+- Footer: Teshow × Ping PH / Not an official GMMTV website.
 
-The website contains no hardcoded artist/series/news/event/merch content. Text comes from the new Google Sheet through Apps Script. Images remain placeholders until uploaded in CMS.
-Modules/nav/home sections using Visibility_Mode=Auto hide when there is no published content.
+True remote push delivery while the browser/site is closed still requires a push backend/service worker.

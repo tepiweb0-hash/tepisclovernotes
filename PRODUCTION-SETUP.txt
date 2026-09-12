@@ -1,0 +1,9 @@
+FLAT BUILD — original visual design preserved.
+
+1) Deploy the contents of this ZIP directly to Vercel (index.html is at ZIP root).
+2) Update config.js:
+   API_URL = deployed Google Apps Script /exec URL
+   SITE_URL = final production domain
+3) Before launch, replace https://example.com in robots.txt and sitemap.xml with final domain.
+4) Ads are hidden by default. Enable only after approval/configuration.
+5) The static HTML stays present as an SEO/indexable fallback even when the Google Sheet API is unavailable.

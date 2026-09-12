@@ -1,0 +1,10 @@
+PUBLIC API UPDATE (v5 DB-driven)
+1. Open the existing Google Sheet > Extensions > Apps Script.
+2. Replace the current Code.gs with this package's Code.gs.
+3. Save.
+4. Run makeMediaPublic() ONCE from the Apps Script editor and approve Drive permissions. This makes MEDIA files viewable by the public website.
+5. Deploy > Manage deployments > Edit current Web App deployment > New version > Deploy.
+6. Keep Execute as: Me; Who has access: Anyone.
+7. The existing /exec URL can stay the same.
+
+CMS comes next. Do not delete logo.png from the public site. Other local images are only temporary fallbacks until Drive media is public and verified.
