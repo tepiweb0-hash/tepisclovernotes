@@ -23,8 +23,8 @@ export default function FloatingNav({ data }: { data: Bootstrap }) {
 
   return <>
     <nav className="floating-nav" aria-label="Primary navigation">
-      <Link className="brand-mark" href="/" aria-label="TE SHOW THE PING home" onClick={()=>setMenuOpen(false)}>
-        {showLogo?<img src="/logo.png" alt="TE SHOW THE PING" />:<span>{data.site.site_name||'TEPi'}</span>}
+      <Link className="brand-mark" href="/" aria-label="Teshow and Ping Clover Notes home" onClick={()=>setMenuOpen(false)}>
+        {showLogo?<img src="/teshow-ping-clover-notes-logo.png" alt="Teshow and Ping Clover Notes" />:<span>{data.site.site_name||'Teshow and Ping Clover Notes'}</span>}
       </Link>
       <div className="nav-scroll nav-desktop">{links.map(n=><Link key={n.nav_id} href={safeHref(n.href,'/')}>{n.label}</Link>)}</div>
       <div className="nav-tools">
@@ -36,7 +36,7 @@ export default function FloatingNav({ data }: { data: Bootstrap }) {
     </nav>
     <div className={`mobile-nav-backdrop ${menuOpen?'show':''}`} onClick={()=>setMenuOpen(false)} aria-hidden="true" />
     <aside id="mobile-site-menu" className={`mobile-nav-sheet ${menuOpen?'show':''}`} aria-hidden={!menuOpen}>
-      <div className="mobile-nav-head"><div><p className="eyebrow">Explore</p><strong>{data.site.site_name||"TePi's Clover Note"}</strong></div><button onClick={()=>setMenuOpen(false)} aria-label="Close menu">×</button></div>
+      <div className="mobile-nav-head"><div><p className="eyebrow">Explore</p><strong>{data.site.site_name||"Teshow and Ping Clover Notes"}</strong></div><button onClick={()=>setMenuOpen(false)} aria-label="Close menu">×</button></div>
       <div className="mobile-nav-links">{links.map((n,i)=><Link key={n.nav_id} href={safeHref(n.href,'/')} onClick={()=>setMenuOpen(false)}><span>{String(i+1).padStart(2,'0')}</span><b>{n.label}</b><em>→</em></Link>)}</div>
       <p className="mobile-nav-note">{data.site.site_tagline||'Made by fans, for fans of Teshow & Ping.'}</p>
     </aside>
