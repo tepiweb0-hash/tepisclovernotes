@@ -1,25 +1,33 @@
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getBootstrap, findMedia } from '@/lib/content'
+import { findMedia, getBootstrap } from '@/lib/content'
+import { formatTime12, relatedNews, timezoneLabel } from '@/lib/utils'
 import SiteShell from '@/components/SiteShell'
 import MediaImage from '@/components/MediaImage'
 import MediaGallery from '@/components/MediaGallery'
-import Link from 'next/link'
-import { formatDate } from '@/lib/utils'
+import EpisodeGrid from '@/components/EpisodeGrid'
+import SeriesCard from '@/components/SeriesCard'
+import NewsGrid from '@/components/NewsGrid'
 
-export async function generateMetadata({params}:{params:{slug:string}}){ const d=await getBootstrap(); const s=d.series.find(x=>x.slug===params.slug); return {title:s?.seo_title||s?.title||'Series',description:s?.seo_description||s?.short_synopsis} }
+export async function generateMetadata({params}:{params:{slug:string}}){const d=await getBootstrap();const s=d.series.find(x=>x.slug===params.slug);return{title:s?.seo_title||s?.title||'Series',description:s?.seo_description||s?.short_synopsis}}
 
 export default async function SeriesDetail({params}:{params:{slug:string}}){
-  const data=await getBootstrap(); const series=data.series.find(s=>s.slug===params.slug && ['published','airing','completed'].includes(String(s.status))); if(!series)notFound()
-  const poster=findMedia(data,series.hero_media_id||series.poster_media_id)
-  const cast=data.seriesCast.filter(c=>c.series_id===series.series_id&&c.enabled!==false).sort((a,b)=>Number(a.billing_order)-Number(b.billing_order))
-  const eps=data.episodes.filter(e=>e.series_id===series.series_id&&e.enabled!==false).sort((a,b)=>Number(a.episode_number)-Number(b.episode_number))
-  const galRows=data.galleries.filter(g=>g.entity_type==='series'&&g.entity_id===series.series_id&&g.enabled!==false).sort((a,b)=>Number(a.sort_order)-Number(b.sort_order))
-  const galMedia=galRows.map(g=>findMedia(data,g.media_id)).filter(Boolean) as any[]
-  const gs=data.gallerySettings.find(g=>g.entity_type==='series'&&g.entity_id===series.series_id&&g.enabled!==false)
+  const data=await getBootstrap(),series=data.series.find(s=>s.slug===params.slug&&['published','airing','completed'].includes(String(s.status))); if(!series)notFound()
+  const poster=findMedia(data,series.hero_media_id||series.poster_media_id),cast=data.seriesCast.filter(c=>c.series_id===series.series_id&&c.enabled!==false).sort((a,b)=>Number(a.billing_order)-Number(b.billing_order)),eps=data.episodes.filter(e=>e.series_id===series.series_id&&e.enabled!==false).sort((a,b)=>Number(a.episode_number)-Number(b.episode_number))
+  const galRows=data.galleries.filter(g=>g.entity_type==='series'&&g.entity_id===series.series_id&&g.enabled!==false).sort((a,b)=>Number(a.sort_order)-Number(b.sort_order)),galMedia=galRows.map(g=>findMedia(data,g.media_id)).filter(Boolean) as any[],gs=data.gallerySettings.find(g=>g.entity_type==='series'&&g.entity_id===series.series_id&&g.enabled!==false)
+  const seriesArtistIds=cast.map(c=>c.artist_id).filter(Boolean),moreSeries=data.series.filter(s=>s.series_id!==series.series_id&&['published','airing','completed'].includes(String(s.status))).filter(s=>data.seriesCast.some(c=>c.series_id===s.series_id&&seriesArtistIds.includes(c.artist_id))).slice(0,4)
+  const news=relatedNews(data.news,series.series_id,undefined,6),events=data.events.filter(e=>e.enabled!==false&&(e.related_series_id===series.series_id||String(e.description||'').includes(series.title))).slice(0,3)
   return <SiteShell data={data}>
-    <section className="series-detail-hero page-pad"><MediaImage src={poster?.url} alt={poster?.alt_text||series.title} className="series-detail-poster" eager/><div><p className="eyebrow">{series.year} • {series.status}</p><h1>{series.title}</h1><p className="lede small">{series.synopsis}</p><div className="fact-pills">{series.genre&&<span>{series.genre}</span>}{series.release_day&&<span>{series.release_day} {series.release_time}</span>}{series.network&&<span>{series.network}</span>}</div>{series.trailer_url&&<a className="button primary" href={series.trailer_url} target="_blank" rel="noreferrer">{data.ui.official_trailer||'Official Trailer'}</a>}</div></section>
-    <section className="page-pad"><div className="section-heading"><div><p className="eyebrow">{data.ui.cast_label||'Cast'}</p><h2>{data.ui.main_cast||'Main cast'}</h2></div></div><div className="cast-strip">{cast.map(c=>{const a=data.artists.find(x=>x.artist_id===c.artist_id);const m=findMedia(data,a?.profile_media_id);return <Link href={a?`/artists/${a.slug}`:'#'} className="cast-card" key={c.cast_id}><MediaImage src={m?.url} alt={a?.display_name} className="cast-image"/><strong>{a?.display_name||'Artist'}</strong><span>{c.character_name}</span></Link>})}</div></section>
-    <section className="page-pad"><div className="section-heading"><div><p className="eyebrow">{data.ui.release_schedule||'Release schedule'}</p><h2>{data.ui.episodes_label||'Episodes'}</h2></div></div><div className="episode-list">{eps.length?eps.map(e=><article key={e.episode_id}><div><span>EP {e.episode_number}</span><h3>{e.title}</h3><p>{e.summary||'Episode details can be updated from the CMS.'}</p></div><time>{formatDate(e.release_date)} {e.release_time||''}</time></article>):<div className="empty-card"><p>Episodes can be added from the CMS.</p></div>}</div></section>
-    {galMedia.length>0&&<section className="page-pad subtle-gallery"><div className="section-heading"><div><p className="eyebrow">{data.ui.photos_label||'Photos'}</p><h2>{data.ui.album_label||'Album'}</h2></div></div><MediaGallery items={galMedia} mode={gs?.display_mode||'carousel'} interval={Number(gs?.interval_ms||4500)}/></section>}
+    <section className="series-detail-hero page-pad"><div className="series-poster-frame"><MediaImage src={poster?.url} alt={poster?.alt_text||series.title} className="series-detail-poster" eager/><span className="series-year-badge">{series.year}</span></div><div><p className="eyebrow">{series.status} • {series.genre}</p><h1>{series.title}</h1>{series.native_title&&<p className="native-name">{series.native_title}</p>}<p className="lede small">{series.synopsis}</p><div className="fact-pills">{series.release_day&&<span>{series.release_day}s</span>}{series.release_time&&<span>{formatTime12(series.release_time)} • {timezoneLabel(series.timezone||'Asia/Bangkok')}</span>}{series.network&&<span>{series.network}</span>}{series.platform&&<span>Replay · {series.platform} {formatTime12(series.rerun_time)}</span>}{series.episode_count&&<span>{series.episode_count} episodes</span>}</div><div className="card-actions">{series.trailer_url&&<a className="button primary" href={series.trailer_url} target="_blank" rel="noreferrer">{data.ui.official_trailer||'Official Trailer'} ↗</a>}{series.official_url&&<a className="button ghost" href={series.official_url} target="_blank" rel="noreferrer">Official info ↗</a>}</div></div></section>
+
+    <section className="page-pad premium-section"><div className="section-heading"><div><p className="eyebrow">{data.ui.cast_label||'Cast'}</p><h2>{data.ui.main_cast||'Main cast'}</h2></div></div><div className="cast-strip">{cast.map(c=>{const a=data.artists.find(x=>x.artist_id===c.artist_id),m=findMedia(data,a?.profile_media_id);return a?<Link href={`/artists/${a.slug}`} className="cast-card" key={c.cast_id}><MediaImage src={m?.url} alt={a.display_name} className="cast-image"/><div><strong>{a.display_name}</strong><span>{c.character_name}</span></div></Link>:null})}</div></section>
+
+    <section className="page-pad premium-section"><div className="section-heading"><div><p className="eyebrow">{data.ui.release_schedule||'Release schedule'}</p><h2>{data.ui.episodes_label||'Episodes'}</h2></div><p className="section-aside">Tap an episode for synopsis, cast, release details and official links.</p></div>{eps.length?<EpisodeGrid episodes={eps} episodeCast={data.episodeCast||[]} media={data.media} series={series}/>:<div className="empty-card"><p>Episodes can be added from the CMS.</p></div>}</section>
+
+    {galMedia.length>0&&<section className="page-pad premium-section subtle-gallery"><div className="section-heading"><div><p className="eyebrow">{data.ui.photos_label||'Photos'}</p><h2>{data.ui.album_label||'Album'}</h2></div></div><MediaGallery items={galMedia} mode={gs?.display_mode||'carousel'} interval={Number(gs?.interval_ms||4500)}/></section>}
+
+    {(news.length>0||events.length>0)&&<section className="page-pad premium-section discovery-block"><div className="section-heading"><div><p className="eyebrow">Keep exploring</p><h2>More from {series.title}.</h2></div></div>{news.length>0&&<><div className="mini-heading"><h3>Related news</h3><Link href="/news">All news →</Link></div><NewsGrid data={data} rows={news.slice(0,3)}/></>}{events.length>0&&<div className="related-events"><div className="mini-heading"><h3>Related events</h3><Link href="/events">Calendar →</Link></div>{events.map(e=><Link className="related-event-card" key={e.event_id} href={`/events/${e.slug}`}><span>{e.event_type||'Event'}</span><div><h3>{e.title}</h3><p>{e.quick_info||e.short_info}</p></div><b>→</b></Link>)}</div>}</section>}
+
+    {moreSeries.length>0&&<section className="page-pad premium-section"><div className="section-heading"><div><p className="eyebrow">More from the artists</p><h2>Continue exploring.</h2></div><Link className="text-link" href="/series">All series →</Link></div><div className="series-grid compact">{moreSeries.map(s=><SeriesCard key={s.series_id} series={s} data={data}/>)}</div></section>}
   </SiteShell>
 }

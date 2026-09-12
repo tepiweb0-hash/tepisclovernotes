@@ -5,7 +5,9 @@ TE SHOW THE PING — PUBLIC WEBSITE
 3. The current Apps Script URL is already wired into this package:
    https://script.google.com/macros/s/AKfycbwITXEZ5o3d5B0fPeKSCGi78riViufjo2HcBjQG5V_lo9z04ss-V8ssiX7h70ZRhfY5/exec
    You may still set CONTENT_API_URL in Vercel later to override it without editing code.
-4. Deploy.
+4. IMPORTANT: deploy/redeploy the revised Apps Script package first using the SAME existing Web App deployment (Manage deployments > Edit > New version > Deploy). This keeps the URL above unchanged and exposes EPISODE_CAST to the public site.
+5. Deploy this public website to Vercel.
+6. After deployment, hard-refresh once. Google Sheet content is revalidated approximately every 60 seconds.
 
 The public website intentionally contains no artist/series/event/news photos.
 The only supplied raster image inside /public is the site logo. Dynamic media comes from Google Sheets/Drive through the Apps Script content API.
@@ -24,3 +26,14 @@ Routes:
 /p/[slug]          CMS-created custom pages
 
 If CONTENT_API_URL is missing, the site still builds but shows a connection notice instead of hardcoded fan content.
+
+
+PREMIUM REVISION FEATURES
+- Light / dark theme toggle using editable Sheet theme tokens
+- Premium logo-palette UI across Home, Artists, Series, Episodes, Events and News
+- Episode cards with 12-hour release time + timezone and full detail modal
+- Episode cast support through EPISODE_CAST
+- Calendar date modal -> Quick Info -> Full Event
+- Notification popup with Quick Info / Full Info and CTAs
+- Dynamic Related News, Related Events and More Series discovery
+- Editable floating header/footer data and restored floating Message Us

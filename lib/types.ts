@@ -20,6 +20,7 @@ export type Bootstrap = {
   series: AnyRow[]
   seriesCast: AnyRow[]
   episodes: AnyRow[]
+  episodeCast: AnyRow[]
   galleries: AnyRow[]
   gallerySettings: AnyRow[]
   news: AnyRow[]

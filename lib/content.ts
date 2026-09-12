@@ -4,7 +4,7 @@ const EMPTY: Bootstrap = {
   ok: false,
   site: {}, ui: {}, theme: {}, fonts: [], navigation: [], socials: [], messageLinks: [],
   pages: [], sections: [], sectionItems: [], media: [], artists: [], artistTimeline: [],
-  artistAchievements: [], series: [], seriesCast: [], episodes: [], galleries: [], gallerySettings: [],
+  artistAchievements: [], series: [], seriesCast: [], episodes: [], episodeCast: [], galleries: [], gallerySettings: [],
   news: [], events: [], notifications: [], homeFeatures: []
 }
 
@@ -32,7 +32,7 @@ export function findMedia(data: Bootstrap, mediaId?: string) {
 export function published<T extends Record<string, any>>(rows: T[]) {
   return rows.filter((row) => {
     if (row.enabled === false || String(row.enabled).toLowerCase() === 'false') return false
-    if ('status' in row && row.status && !['published', 'airing', 'active', 'released', 'completed'].includes(String(row.status))) return false
+    if ('status' in row && row.status && !['published', 'airing', 'active', 'released', 'scheduled', 'completed', 'ready'].includes(String(row.status))) return false
     return true
   })
 }
