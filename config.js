@@ -1,4 +1,4 @@
 window.TP_CONFIG={
-  API_URL:"https://script.google.com/macros/s/AKfycbxa5Asq89nfpza94FrxOIi-27hGiIH0XFj_bVwZYolOWrlbIu9stKMq_62G1qLvO1ABww/exec",
+  API_URL:"https://script.google.com/macros/s/AKfycbyRfQGCdNNDNGxWB6G2QWILY8pyak0ZIQ55BCxaCSVVCYcabEosZCNC_fjQVsGCHNOoBw/exec",
   SITE_URL:"https://tepisclovernotes.vercel.app"
 };
