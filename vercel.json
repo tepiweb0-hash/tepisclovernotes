@@ -1,0 +1,15 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {"source":"/series/:slug","destination":"/series-detail.html"},
+    {"source":"/news/:slug","destination":"/news-detail.html"},
+    {"source":"/events/:slug","destination":"/event-detail.html"},
+    {"source":"/artists/:slug","destination":"/artist-detail.html"},
+    {"source":"/merch/:slug","destination":"/product.html"}
+  ],
+  "headers": [
+    {"source":"/(.*)\\.(css|js|png|jpg|jpeg|webp|svg)","headers":[{"key":"Cache-Control","value":"public, max-age=31536000, immutable"}]},
+    {"source":"/(.*)","headers":[{"key":"X-Content-Type-Options","value":"nosniff"},{"key":"Referrer-Policy","value":"strict-origin-when-cross-origin"}]}
+  ]
+}
