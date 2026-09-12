@@ -1,3 +1,9 @@
-TESHOW × PING PH — VERCEL SHELL BUILD
+TEPIPH Vercel CMS-ready shell v2
 
-Public website shell only. No artist, series, news, event, merch, or production images/data are embedded. Only the fixed site logo is included. CMS/API is intentionally disconnected (config.js API_URL blank). Placeholder skeletons preserve layout until CMS publishing is connected.
+1. Deploy the fresh Apps Script CMS package first.
+2. Copy its /exec deployment URL.
+3. Open config.js in this Vercel package and replace PASTE_APPS_SCRIPT_EXEC_URL_HERE.
+4. Deploy all files flat at the project root.
+
+The website contains no hardcoded artist/series/news/event/merch content. Text comes from the new Google Sheet through Apps Script. Images remain placeholders until uploaded in CMS.
+Modules/nav/home sections using Visibility_Mode=Auto hide when there is no published content.
