@@ -1,0 +1,26 @@
+TE SHOW THE PING — PUBLIC WEBSITE
+
+1. Upload this folder to GitHub or import it directly into Vercel.
+2. Framework preset: Next.js.
+3. The current Apps Script URL is already wired into this package:
+   https://script.google.com/macros/s/AKfycbwITXEZ5o3d5B0fPeKSCGi78riViufjo2HcBjQG5V_lo9z04ss-V8ssiX7h70ZRhfY5/exec
+   You may still set CONTENT_API_URL in Vercel later to override it without editing code.
+4. Deploy.
+
+The public website intentionally contains no artist/series/event/news photos.
+The only supplied raster image inside /public is the site logo. Dynamic media comes from Google Sheets/Drive through the Apps Script content API.
+
+Routes:
+/                  Home
+/artists           Artists
+/artists/[slug]    Artist detail
+/series            Series
+/series/[slug]     Series detail + episodes + gallery
+/events            Calendar + notifications
+/events/[slug]     Event detail
+/news              News
+/news/[slug]       News detail
+/notifications     Notification archive
+/p/[slug]          CMS-created custom pages
+
+If CONTENT_API_URL is missing, the site still builds but shows a connection notice instead of hardcoded fan content.
