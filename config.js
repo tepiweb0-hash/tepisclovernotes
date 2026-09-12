@@ -1,1 +1,1 @@
-window.TP_CONFIG={API_URL:"PASTE_APPS_SCRIPT_EXEC_URL_HERE"};
+window.TP_CONFIG={API_URL:"https://script.google.com/macros/s/AKfycbyRfQGCdNNDNGxWB6G2QWILY8pyak0ZIQ55BCxaCSVVCYcabEosZCNC_fjQVsGCHNOoBw/exec"};
