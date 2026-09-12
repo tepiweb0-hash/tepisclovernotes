@@ -371,3 +371,63 @@ body.series-quick-open{overflow:hidden}
   .series-quick-body{padding:22px 20px 28px}
 }
 @media(max-width:390px){.series-card-actions{grid-template-columns:1fr}.series-card-summary{font-size:14px}}
+
+
+/* v10: image-free, full-width responsive featured series band */
+.home-featured-band{
+  width:100%;
+  min-height:clamp(420px,54vw,680px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:clamp(72px,10vw,140px) clamp(24px,7vw,110px);
+  background:linear-gradient(135deg,var(--surface),var(--surface-2));
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  text-align:center;
+  overflow:hidden;
+}
+.home-featured-inner{
+  width:min(1080px,100%);
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.home-featured-band .eyebrow{color:var(--accent);font-size:clamp(10px,1vw,13px)}
+.home-featured-band h2{
+  margin:14px 0 18px;
+  color:var(--ink);
+  font-size:clamp(48px,7.2vw,108px);
+  line-height:.88;
+  letter-spacing:-.065em;
+  text-wrap:balance;
+}
+.home-featured-band p{
+  width:min(820px,100%);
+  margin:0 auto;
+  font-size:clamp(17px,1.65vw,24px);
+  line-height:1.65;
+  color:var(--copy);
+  text-wrap:pretty;
+}
+.home-featured-band .actions{justify-content:center;margin-top:30px;gap:12px}
+.home-featured-band .btn{min-width:150px}
+
+@media(max-width:900px){
+  .home-featured-band{min-height:520px;padding:92px 7vw}
+  .home-featured-band h2{font-size:clamp(48px,10vw,78px)}
+  .home-featured-band p{max-width:680px}
+}
+@media(max-width:640px){
+  .home-featured-band{min-height:auto;padding:76px 20px}
+  .home-featured-band h2{font-size:clamp(42px,14vw,64px);margin:12px 0 16px}
+  .home-featured-band p{font-size:16px;line-height:1.6}
+  .home-featured-band .actions{width:100%;margin-top:24px;gap:9px}
+  .home-featured-band .btn{flex:1 1 0;min-width:0;max-width:220px;padding-inline:14px}
+}
+@media(max-width:400px){
+  .home-featured-band{padding:66px 16px}
+  .home-featured-band .actions{flex-direction:column;align-items:stretch}
+  .home-featured-band .btn{width:100%;max-width:none}
+}
