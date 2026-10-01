@@ -20,7 +20,7 @@ function contentUrl() {
 export async function getBootstrap(): Promise<Bootstrap> {
   try {
     const res = await fetch(contentUrl(), {
-      next: { revalidate: 30 },
+      cache: 'no-store',
       headers: { Accept: 'application/json' }
     })
     if (!res.ok) throw new Error(`Content API returned ${res.status}`)

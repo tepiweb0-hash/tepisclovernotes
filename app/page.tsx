@@ -10,8 +10,11 @@ export default async function Home(){
   const data=await getBootstrap(); if(!data.ok)return <SiteShell data={data}><ConnectionNotice message={data.error}/></SiteShell>
   const features=data.homeFeatures.filter(f=>f.enabled!==false&&String(f.enabled).toLowerCase()!=='false').sort((a,b)=>Number(a.sort_order)-Number(b.sort_order))
   const latestFeature=(slot:string)=>[...features].reverse().find(f=>f.slot===slot)
-  const hero=latestFeature('hero'),current=latestFeature('current_series'),artistFeatures=features.filter(f=>f.slot==='artist_showcase'),artistHeading=latestFeature('artist_heading'),newsHeading=latestFeature('news_heading'),homePage=data.pages.find(p=>p.page_id==='page-home')
-  const currentSeries=data.series.find(s=>s.series_id===current?.entity_id),currentMedia=findMedia(data,current?.media_id_override||currentSeries?.poster_media_id)
+  const hero=latestFeature('hero'),current=latestFeature('current_series'),artistHeading=latestFeature('artist_heading'),newsHeading=latestFeature('news_heading'),homePage=data.pages.find(p=>p.page_id==='page-home')
+  const configuredArtistFeatures=features.filter(f=>f.slot==='artist_showcase')
+  const artistFeatures=configuredArtistFeatures.length>0?configuredArtistFeatures:sortRows(published(data.artists)).slice(0,2).map((a:any,i:number)=>({feature_id:`fallback-artist-${i}`,entity_id:a.artist_id,media_id_override:a.profile_media_id}))
+  const currentSeries=data.series.find(s=>s.series_id===current?.entity_id)||sortRows(published(data.series)).find(s=>s.featured===true)||sortRows(published(data.series))[0]
+  const currentMedia=findMedia(data,current?.media_id_override)||findMedia(data,currentSeries?.poster_media_id)
   const moreSeries=sortRows(published(data.series)).filter(s=>s.series_id!==currentSeries?.series_id).slice(0,4)
   return <SiteShell data={data}>
     <section className="home-hero page-pad"><div className="hero-orbit orbit-one"></div><div className="hero-orbit orbit-two"></div><div className="hero-clover" aria-hidden="true">✦</div><p className="eyebrow">{homePage?.hero_eyebrow||'Fan-made archive'}</p><h1>{hero?.title_override||homePage?.hero_title||data.site.site_name||'Teshow and Ping Clover Notes'}</h1><p className="lede">{hero?.copy_override||homePage?.hero_body||data.site.site_tagline}</p><div className="hero-actions">{hero?.button_href&&<Link className="button primary" href={hero.button_href}>{hero.button_label||'Explore'}</Link>}<Link className="button ghost" href="/artists">Meet Teshow & Ping</Link></div><div className="hero-note"><span>01</span><p>Profiles</p><span>02</span><p>Series & episodes</p><span>03</span><p>Events & updates</p></div></section>
