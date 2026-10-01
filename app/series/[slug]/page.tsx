@@ -12,7 +12,7 @@ import NewsGrid from '@/components/NewsGrid'
 export async function generateMetadata({params}:{params:{slug:string}}){const d=await getBootstrap();const s=d.series.find(x=>x.slug===params.slug);return{title:s?.seo_title||s?.title||'Series',description:s?.seo_description||s?.short_synopsis}}
 
 export default async function SeriesDetail({params}:{params:{slug:string}}){
-  const data=await getBootstrap(),series=data.series.find(s=>s.slug===params.slug&&['published','airing','completed'].includes(String(s.status))); if(!series)notFound()
+  const data=await getBootstrap(),series=data.series.find(s=>s.slug===params.slug); if(!series)notFound()
   const poster=findMedia(data,series.hero_media_id||series.poster_media_id),cast=data.seriesCast.filter(c=>c.series_id===series.series_id&&c.enabled!==false).sort((a,b)=>Number(a.billing_order)-Number(b.billing_order)),eps=data.episodes.filter(e=>e.series_id===series.series_id&&e.enabled!==false).sort((a,b)=>Number(a.episode_number)-Number(b.episode_number))
   const galRows=data.galleries.filter(g=>g.entity_type==='series'&&g.entity_id===series.series_id&&g.enabled!==false).sort((a,b)=>Number(a.sort_order)-Number(b.sort_order)),galMedia=galRows.map(g=>findMedia(data,g.media_id)).filter(Boolean) as any[],gs=data.gallerySettings.find(g=>g.entity_type==='series'&&g.entity_id===series.series_id&&g.enabled!==false)
   const seriesArtistIds=cast.map(c=>c.artist_id).filter(Boolean),moreSeries=data.series.filter(s=>s.series_id!==series.series_id&&['published','airing','completed'].includes(String(s.status))).filter(s=>data.seriesCast.some(c=>c.series_id===s.series_id&&seriesArtistIds.includes(c.artist_id))).slice(0,4)

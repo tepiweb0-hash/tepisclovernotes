@@ -12,6 +12,7 @@ export default function FloatingNav({ data }: { data: Bootstrap }) {
   const links = [...data.navigation].filter(n => n.enabled !== false && String(n.enabled).toLowerCase()!=='false').sort((a,b) => Number(a.sort_order)-Number(b.sort_order))
   const showLogo=String(data.site.header_show_logo||'true').toLowerCase()!=='false'
   const showTheme=String(data.site.show_theme_toggle||'true').toLowerCase()!=='false'
+  const showNotifications=String(data.site.enable_notifications||'true').toLowerCase()!=='false'
 
   useEffect(()=>{
     if(!menuOpen) return
@@ -28,7 +29,7 @@ export default function FloatingNav({ data }: { data: Bootstrap }) {
       </Link>
       <div className="nav-scroll nav-desktop">{links.map(n=><Link key={n.nav_id} href={safeHref(n.href,'/')}>{n.label}</Link>)}</div>
       <div className="nav-tools">
-        {showTheme&&<ThemeToggle label={data.site.theme_toggle_label||'Theme'}/>}<NotificationBell notifications={data.notifications} ui={data.ui}/>
+        {showTheme&&<ThemeToggle label={data.site.theme_toggle_label||'Theme'}/>} {showNotifications&&<NotificationBell notifications={data.notifications} ui={data.ui}/>}
         <button className={`nav-menu-toggle ${menuOpen?'active':''}`} type="button" onClick={()=>setMenuOpen(v=>!v)} aria-expanded={menuOpen} aria-controls="mobile-site-menu" aria-label={menuOpen?'Close menu':'Open menu'}>
           <span></span><span></span><span></span>
         </button>

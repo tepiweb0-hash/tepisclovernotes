@@ -11,7 +11,7 @@ import NewsGrid from '@/components/NewsGrid'
 export async function generateMetadata({params}:{params:{slug:string}}){const d=await getBootstrap();const a=d.artists.find(x=>x.slug===params.slug);return{title:a?.seo_title||a?.full_name||'Artist',description:a?.seo_description||a?.quick_info}}
 
 export default async function ArtistDetail({params}:{params:{slug:string}}){
-  const data=await getBootstrap(),artist=data.artists.find(a=>a.slug===params.slug&&a.status==='published'); if(!artist)notFound()
+  const data=await getBootstrap(),artist=data.artists.find(a=>a.slug===params.slug); if(!artist)notFound()
   const media=findMedia(data,artist.hero_media_id||artist.profile_media_id),roles=data.seriesCast.filter(c=>c.artist_id===artist.artist_id&&c.enabled!==false).sort((a,b)=>Number(a.billing_order)-Number(b.billing_order)),series=roles.map(r=>data.series.find(s=>s.series_id===r.series_id)).filter(Boolean) as any[]
   const timeline=data.artistTimeline.filter(t=>t.artist_id===artist.artist_id&&t.enabled!==false).sort((a,b)=>String(a.date).localeCompare(String(b.date))),achievements=data.artistAchievements.filter(x=>x.artist_id===artist.artist_id&&x.enabled!==false).sort((a,b)=>Number(a.sort_order)-Number(b.sort_order))
   const currentRole=roles.find(r=>{const s=data.series.find(x=>x.series_id===r.series_id);return s?.status==='airing'})||roles[roles.length-1],currentSeries=data.series.find(s=>s.series_id===currentRole?.series_id),currentPoster=findMedia(data,currentSeries?.poster_media_id)

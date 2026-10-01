@@ -28,9 +28,9 @@ export async function getBootstrap(): Promise<Bootstrap> {
     const media = Array.isArray(json?.media)
       ? json.media.map((item: any) => ({
           ...item,
-          url: item?.file_id
+          url: item?.secure_url || (item?.file_id
             ? `https://lh3.googleusercontent.com/d/${encodeURIComponent(String(item.file_id))}`
-            : item?.secure_url || item?.url
+            : item?.url)
         }))
       : []
     return { ...EMPTY, ...json, media, ok: json?.ok !== false }
