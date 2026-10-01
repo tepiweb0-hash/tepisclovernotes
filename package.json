@@ -1,5 +1,5 @@
 {
-  "name": "tepisclovernotes-public",
+  "name": "teshow-ping-fan-site",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -11,8 +11,7 @@
   "dependencies": {
     "next": "14.2.31",
     "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "firebase": "^11.10.0"
+    "react-dom": "18.3.1"
   },
   "devDependencies": {
     "@types/node": "20.17.30",
