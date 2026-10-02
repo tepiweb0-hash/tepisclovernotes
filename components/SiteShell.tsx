@@ -11,9 +11,25 @@ export default function SiteShell({data,children}:{data:Bootstrap,children:React
   const bodyFont=data.fonts.find(f=>f.role==='body'&&f.enabled!==false)
   const headingFont=data.fonts.find(f=>f.role==='heading'&&f.enabled!==false)
   const fontUrls=Array.from(new Set(data.fonts.filter(f=>f.enabled!==false&&/^https:\/\/fonts\.googleapis\.com\//.test(String(f.google_css_url||''))).map(f=>String(f.google_css_url))))
+  // Public-site brand palette. Fonts and radius remain CMS-controlled, while the
+  // visual brand colors are intentionally locked to the approved Teshow/Ping palette.
   const style:any={
-    '--navy':cssColor(data.theme.color_navy,'#163B63'),'--frost':cssColor(data.theme.color_frost,'#DDEAF5'),'--pink':cssColor(data.theme.color_pink,'#D7BEC5'),'--green':cssColor(data.theme.color_clover,'#52B848'),'--ink':cssColor(data.theme.color_ink,'#14212B'),'--paper':cssColor(data.theme.color_paper,'#F7F9FB'),
-    '--dark-bg':cssColor(data.theme.dark_bg,'#0A1520'),'--dark-surface':cssColor(data.theme.dark_surface,'#102638'),'--dark-surface-alt':cssColor(data.theme.dark_surface_alt,'#17354B'),'--dark-text':cssColor(data.theme.dark_text,'#F4F8FB'),'--dark-muted':cssColor(data.theme.dark_muted,'#A7BBC9'),'--dark-line':cssColor(data.theme.dark_line,'#29465D'),
+    '--navy':'#986f53',       // primary brown
+    '--frost':'#f2ded1',      // warm beige
+    '--pink':'#fad6e6',       // light pink
+    '--green':'#eda9c9',      // stronger pink accent (legacy semantic var)
+    '--ink':'#2f2520',
+    '--paper':'#ffffff',
+    '--surface':'#ffffff',
+    '--surface-2':'#f2ded1',
+    '--muted':'#7a6254',
+    '--line':'#e7d6cb',
+    '--dark-bg':'#2f211b',
+    '--dark-surface':'#463229',
+    '--dark-surface-alt':'#5a4033',
+    '--dark-text':'#ffffff',
+    '--dark-muted':'#f2ded1',
+    '--dark-line':'#986f53',
     '--radius':cssLength(data.theme.radius_card,'28px'),'--font-body':`'${fontFamily(bodyFont?.family,'Inter')}', Inter, sans-serif`,'--font-heading':`'${fontFamily(headingFont?.family,'Manrope')}', Manrope, sans-serif`
   }
   return <div className="site-theme" style={style}>{fontUrls.map(url=><link key={url} rel="stylesheet" href={url}/>)}<FloatingNav data={data}/><main>{children}</main><Footer data={data}/><MessageUs data={data}/></div>

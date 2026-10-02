@@ -416,3 +416,104 @@ html[data-theme="dark"] .series-float-card{background:rgba(5,17,26,.9)}
   .series-card-copy{padding:12px}.series-card-copy h2{font-size:1.08rem}.series-card-copy p{font-size:.74rem;-webkit-line-clamp:2}
   .news-card{grid-template-columns:88px minmax(0,1fr)}
 }
+
+/* =========================================================
+   TESH0W + PING BRAND PALETTE — 2026 public-site refresh
+   Approved palette:
+   #ffffff / #986f53 / #fad6e6 / #eda9c9 / #f2ded1
+   ========================================================= */
+.site-theme{
+  --brand-white:#ffffff;
+  --brand-brown:#986f53;
+  --brand-pink-light:#fad6e6;
+  --brand-pink:#eda9c9;
+  --brand-beige:#f2ded1;
+}
+body:before{
+  background:
+    radial-gradient(circle at 12% 4%,rgba(250,214,230,.72),transparent 27%),
+    radial-gradient(circle at 88% 5%,rgba(237,169,201,.40),transparent 30%),
+    radial-gradient(circle at 72% 76%,rgba(242,222,209,.72),transparent 30%),
+    linear-gradient(180deg,#ffffff 0%,#ffffff 48%,#f2ded1 100%);
+}
+html[data-theme="dark"] body:before{
+  background:
+    radial-gradient(circle at 15% 0%,rgba(237,169,201,.16),transparent 27%),
+    radial-gradient(circle at 88% 4%,rgba(250,214,230,.10),transparent 29%),
+    linear-gradient(180deg,#2f211b,var(--paper));
+}
+::selection{background:var(--brand-pink);color:var(--brand-brown)}
+
+.floating-nav{
+  grid-template-columns:82px 1fr auto;
+  border-color:rgba(152,111,83,.16);
+  box-shadow:0 18px 55px rgba(152,111,83,.15);
+}
+.brand-mark{justify-content:flex-start}
+.brand-mark img{
+  width:58px;
+  height:58px;
+  object-fit:cover;
+  border-radius:16px;
+  border:1px solid rgba(152,111,83,.16);
+  box-shadow:0 7px 20px rgba(152,111,83,.14);
+}
+.nav-scroll a:hover{box-shadow:0 5px 18px rgba(152,111,83,.10)}
+.nav-bell{background:var(--brand-brown);color:#fff}
+.bell-dot{background:var(--brand-pink);color:var(--brand-brown);border-color:#fff}
+.theme-toggle{background:#fff;border-color:#e7d6cb}
+
+.button.primary{
+  background:var(--brand-brown);
+  color:#fff;
+  box-shadow:0 12px 32px rgba(152,111,83,.22);
+}
+.button.primary:hover{box-shadow:0 16px 40px rgba(152,111,83,.30)}
+.button.ghost{border-color:#e7d6cb}
+
+.hero-clover{
+  background:var(--brand-pink);
+  color:var(--brand-brown);
+  box-shadow:0 15px 40px rgba(237,169,201,.30);
+}
+.orbit-one{
+  background:radial-gradient(circle at 50% 46%,rgba(250,214,230,.58),rgba(242,222,209,.32) 42%,transparent 69%);
+  border-color:rgba(152,111,83,.12);
+}
+.orbit-two{border-color:rgba(237,169,201,.58)}
+.hero-note span{color:var(--brand-brown)}
+
+.site-footer{
+  background:linear-gradient(135deg,#986f53 0%,#a77c60 52%,#eda9c9 130%);
+  box-shadow:0 26px 90px rgba(152,111,83,.24);
+}
+.site-footer:after{color:rgba(250,214,230,.22)}
+.footer-logo{
+  width:190px;
+  aspect-ratio:1;
+  object-fit:cover;
+  border-radius:30px;
+  border:1px solid rgba(255,255,255,.30);
+  box-shadow:0 18px 50px rgba(67,43,30,.20);
+}
+.message-fab{
+  background:linear-gradient(135deg,#986f53,#a77c60);
+  box-shadow:0 16px 44px rgba(152,111,83,.28);
+}
+.message-fab span{background:var(--brand-pink);color:var(--brand-brown)}
+
+.series-float-card{background:rgba(84,57,43,.88)}
+.text-link{color:var(--brand-brown)}
+html[data-theme="dark"] .text-link{color:var(--brand-pink-light)}
+.eyebrow{color:var(--brand-brown)}
+html[data-theme="dark"] .eyebrow{color:var(--brand-pink-light)}
+
+/* keep the approved soft colors present across cards and highlights */
+.feature-strip,.quick-info,.calendar-shell,.notification-panel,.episode-modal,.calendar-modal{
+  border-color:color-mix(in srgb,var(--brand-brown) 18%,transparent);
+}
+
+@media(max-width:760px){
+  .floating-nav{grid-template-columns:62px 1fr auto}
+  .brand-mark img{width:48px;height:48px;border-radius:13px}
+}
