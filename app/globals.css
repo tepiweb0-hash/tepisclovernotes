@@ -577,3 +577,119 @@ html[data-theme="dark"] .eyebrow{color:var(--brand-pink-light)}
   .qr-share-actions .button:first-child{grid-column:auto}
   .qr-share-code-frame{width:min(205px,68vw)}
 }
+
+
+/* Funny QR download page */
+.qr-download-page{
+  min-height:100dvh;
+  display:grid;
+  place-items:center;
+  padding:34px 18px;
+  background:
+    radial-gradient(circle at 12% 10%,rgba(250,214,230,.9),transparent 28%),
+    radial-gradient(circle at 88% 88%,rgba(237,169,201,.28),transparent 27%),
+    linear-gradient(180deg,#fff 0%,#fff8fb 48%,#f2ded1 100%);
+  color:#3a2a22;
+}
+.qr-download-card{
+  width:min(620px,100%);
+  text-align:center;
+  padding:28px;
+  border:1px solid rgba(152,111,83,.15);
+  border-radius:32px;
+  background:rgba(255,255,255,.92);
+  box-shadow:0 28px 90px rgba(91,59,42,.14);
+}
+.qr-download-kicker{
+  margin:0 0 9px;
+  color:#986f53;
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+.qr-download-card h1{
+  margin:0;
+  font-size:clamp(2rem,7vw,4.2rem);
+  line-height:.94;
+  letter-spacing:-.05em;
+  color:#3a2a22;
+}
+.qr-download-copy{
+  margin:16px auto 20px;
+  color:#7a6254;
+  line-height:1.6;
+}
+.qr-cat-button{
+  display:block;
+  width:min(390px,100%);
+  margin:0 auto 20px;
+  padding:0;
+  border:0;
+  border-radius:25px;
+  overflow:hidden;
+  background:#fad6e6;
+  cursor:pointer;
+  box-shadow:0 18px 42px rgba(91,59,42,.15);
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.qr-cat-button:hover{transform:rotate(-1deg) scale(1.015);box-shadow:0 22px 52px rgba(91,59,42,.2)}
+.qr-cat-button:active{transform:scale(.985)}
+.qr-cat-button img{
+  display:block;
+  width:100%;
+  min-height:230px;
+  max-height:360px;
+  object-fit:cover;
+}
+.qr-sound-hint{
+  margin:-5px auto 16px;
+  max-width:440px;
+  color:#986f53;
+  font-size:.8rem;
+  font-weight:750;
+}
+.qr-download-main-button,
+.qr-download-svg-button{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  min-height:55px;
+  padding:12px 18px;
+  border-radius:18px;
+  text-align:center;
+  font-weight:900;
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.qr-download-main-button{
+  background:#986f53;
+  color:#fff;
+  box-shadow:0 13px 28px rgba(152,111,83,.25);
+}
+.qr-download-main-button:hover{transform:translateY(-2px);box-shadow:0 17px 36px rgba(152,111,83,.3)}
+.qr-download-svg-button{
+  margin-top:10px;
+  background:#fad6e6;
+  color:#684837;
+  border:1px solid rgba(237,169,201,.7);
+}
+.qr-download-svg-button:hover{transform:translateY(-2px)}
+.qr-download-small{
+  margin:17px 0 0;
+  color:#9a7f70;
+  font-size:.78rem;
+}
+.qr-download-back{
+  display:inline-block;
+  margin-top:20px;
+  color:#986f53;
+  font-size:.84rem;
+  font-weight:800;
+}
+.qr-download-back:hover{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:560px){
+  .qr-download-page{padding:18px 12px}
+  .qr-download-card{padding:22px 14px;border-radius:26px}
+  .qr-cat-button img{min-height:205px}
+}
