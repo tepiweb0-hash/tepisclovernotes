@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { safeHref } from '@/lib/utils'
 import QrSharePanel from '@/components/QrSharePanel'
 
@@ -78,9 +77,6 @@ export default function QrLandingPage() {
       <div className="qr-landing-orb qr-orb-two" aria-hidden="true" />
 
       <section className="qr-linktree-card" aria-labelledby="qr-title">
-        <Link href="/" className="qr-logo-link" aria-label="Teshow & Ping PH home">
-          <img src="/teshow-ping-clover-notes-logo.png" alt="Teshow & Ping PH" className="qr-brand-logo" />
-        </Link>
         <p className="qr-kicker">Teshow &amp; Ping PH</p>
         <h1 id="qr-title">Find us everywhere.</h1>
         <p className="qr-intro">All our official links in one place.</p>
