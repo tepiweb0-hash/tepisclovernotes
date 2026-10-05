@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { safeHref } from '@/lib/utils'
+import QrSharePanel from '@/components/QrSharePanel'
 
 export const metadata: Metadata = {
   title: 'Social Links',
@@ -40,10 +41,34 @@ const links: LinkItem[] = [
   }
 ]
 
-function platformMark(platform: LinkItem['platform']) {
-  if (platform === 'instagram') return '◎'
-  if (platform === 'x') return '𝕏'
-  return '⌂'
+function PlatformIcon({ platform }: { platform: LinkItem['platform'] }) {
+  if (platform === 'instagram') {
+    return (
+      <svg viewBox="0 0 24 24" className="qr-social-icon-svg" aria-hidden="true" focusable="false">
+        <rect x="3.25" y="3.25" width="17.5" height="17.5" rx="5.2" fill="none" stroke="currentColor" strokeWidth="1.9" />
+        <circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" strokeWidth="1.9" />
+        <circle cx="17.25" cy="6.85" r="1.2" fill="currentColor" />
+      </svg>
+    )
+  }
+
+  if (platform === 'x') {
+    return (
+      <svg viewBox="0 0 24 24" className="qr-social-icon-svg" aria-hidden="true" focusable="false">
+        <path
+          d="M5 4.5h3.7l4.1 5.38 4.76-5.38H19l-5.52 6.25L20 19.5h-3.72l-4.39-5.75-5.08 5.75H5.25l5.85-6.63z"
+          fill="currentColor"
+        />
+      </svg>
+    )
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" className="qr-social-icon-svg" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" strokeWidth="1.7" />
+      <path d="M3.9 12h16.2M12 3.5c2.15 2.38 3.25 5.36 3.25 8.5S14.15 18.12 12 20.5c-2.15-2.38-3.25-5.36-3.25-8.5S9.85 5.88 12 3.5Z" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
 }
 
 export default function QrLandingPage() {
@@ -69,27 +94,14 @@ export default function QrLandingPage() {
               rel="noreferrer"
               className="qr-social-link"
             >
-              <span className="qr-social-icon" aria-hidden="true">{platformMark(item.platform)}</span>
+              <span className="qr-social-icon" aria-hidden="true"><PlatformIcon platform={item.platform} /></span>
               <span className="qr-social-copy"><b>{item.label}</b><small>{item.helper}</small></span>
               <span className="qr-social-arrow" aria-hidden="true">↗</span>
             </a>
           ))}
         </div>
 
-        <div className="qr-permanent-card">
-          <div className="qr-code-frame">
-            <img src="/qr/teshow-ping-socials-qr.png" alt="Permanent QR code for the Teshow and Ping PH links page" />
-          </div>
-          <div className="qr-permanent-copy">
-            <p className="qr-kicker">One permanent QR</p>
-            <h2>Print it once. Keep using the same QR.</h2>
-            <p>The QR always opens this <strong>/qr</strong> page. If a social account changes later, we only update this landing page — the printed QR stays the same.</p>
-            <div className="qr-download-actions">
-              <a className="button primary" href="/qr/teshow-ping-socials-qr.png" download>Download PNG</a>
-              <a className="button ghost" href="/qr/teshow-ping-socials-qr.svg" download>Download SVG</a>
-            </div>
-          </div>
-        </div>
+        <QrSharePanel />
 
         <p className="qr-footnote">Permanent destination: tepisclovernotes.vercel.app/qr</p>
       </section>
