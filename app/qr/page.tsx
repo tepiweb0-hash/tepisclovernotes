@@ -4,7 +4,7 @@ import QrSharePanel from '@/components/QrSharePanel'
 
 export const metadata: Metadata = {
   title: 'Social Links',
-  description: 'Official Teshow & Ping PH social links in one place.',
+  description: 'Official TeshowPing PH social links in one place.',
   robots: { index: true, follow: true }
 }
 
@@ -77,7 +77,7 @@ export default function QrLandingPage() {
       <div className="qr-landing-orb qr-orb-two" aria-hidden="true" />
 
       <section className="qr-linktree-card" aria-labelledby="qr-title">
-        <p className="qr-kicker">Teshow &amp; Ping PH</p>
+        <p className="qr-kicker">TeshowPing PH</p>
         <h1 id="qr-title">Find us everywhere.</h1>
         <p className="qr-intro">All our official links in one place.</p>
 

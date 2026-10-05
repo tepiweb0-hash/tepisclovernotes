@@ -3,7 +3,7 @@ import QrDownloadMeme from "@/components/QrDownloadMeme"
 
 export const metadata: Metadata = {
   title: "QR Download",
-  description: "Download the Teshow & Ping PH QR code.",
+  description: "Download the TeshowPing PH QR code.",
   robots: { index: false, follow: true }
 }
 

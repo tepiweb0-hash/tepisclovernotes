@@ -49,11 +49,11 @@ export default function QrSharePanel() {
           >
             <button className="qr-share-close" type="button" aria-label="Close QR sharing panel" onClick={() => setOpen(false)}>×</button>
             <p className="qr-kicker">Permanent QR</p>
-            <h2 id="qr-share-title">Share Teshow &amp; Ping PH</h2>
+            <h2 id="qr-share-title">Share TeshowPing PH</h2>
             <p className="qr-share-intro">One QR for this social-links page. The QR itself stays the same even when the links on this page are updated.</p>
 
             <div className="qr-share-code-frame">
-              <img src="/qr/teshow-ping-socials-qr.png" alt="QR code for the Teshow and Ping PH social links page" />
+              <img src="/qr/teshow-ping-socials-qr.png" alt="QR code for the TeshowPing PH social links page" />
             </div>
 
             <p className="qr-share-url">tepisclovernotes.vercel.app/qr</p>
